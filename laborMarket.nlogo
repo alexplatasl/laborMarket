@@ -52,8 +52,10 @@ to initialize-people
 end
 
 to go
-  ; stop condition
-  if ( ticks >= 100 ) [stop]
+  ;; stop condition
+  ; 60 ticks are equivalent to 15 years
+  ; So, simulated period from 2005 to 2020
+  if ( ticks >= 60 ) [stop]
 
   ; First process
   age
@@ -65,7 +67,7 @@ end
 to age
   if (ticks > 0 and ( ticks mod 4 = 0 ) )[
     ask people [
-      set eda ifelse-value ( (eda / 102) ^ 2 < random-float 10)[eda + 1][0]
+      set eda ifelse-value ( (eda / 102) ^ 2 < random-float 7)[eda + 1][0]
     ]
   ]
 end
@@ -142,8 +144,8 @@ PLOT
 1101
 160
 Age distribution
-NIL
-NIL
+Age
+Freq
 0.0
 100.0
 0.0
@@ -155,15 +157,34 @@ PENS
 "default" 1.0 1 -16777216 true "" "plot-age"
 
 MONITOR
-1104
-10
-1189
-55
+1009
+19
+1094
+64
 Average age
 mean [eda] of people
 0
 1
 11
+
+PLOT
+1104
+10
+1460
+160
+Trend Age
+Quarter
+Age
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"avg" 1.0 0 -16777216 true "" "plot mean [eda] of people"
+"max" 1.0 0 -2674135 true "" "plot max [eda] of people"
 
 @#$#@#$#@
 ## WHAT IS IT?
