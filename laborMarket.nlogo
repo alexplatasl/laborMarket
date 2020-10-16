@@ -2,7 +2,6 @@ extensions [ csv ]
 
 breed [people person]
 
-;people-own [unemployed?]
 people-own [
   sex
   eda
@@ -27,23 +26,16 @@ to setup
 
   while [ not file-at-end? ] [
     let data csv:from-row file-read-line
-    print data
-    ;create-people 1 [
-    ;set color read-from-string item 1 data
-    ;set size item 2 data
-    ;set heading item 3 data
-    ;set xcor item 4 data
-    ;set ycor item 5 data
-    ;set shape "person"
-    ;set unemployed? item 6 data
-    ;]
+    ;print data
     create-people 1 [
       setxy random-xcor random-ycor
+      set shape "person"
       set sex item 21 data
       set eda item 22 data
       set e_con item 35 data
       set Clase2 item 47 data
       set ingocup item 88 data
+      ;set color read-from-string item 1 data
     ]
   ]
   file-close-all
