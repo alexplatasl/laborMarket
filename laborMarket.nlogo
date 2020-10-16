@@ -1,6 +1,10 @@
-extensions [ csv ]
+extensions [ csv
+  ;time
+]
 
 breed [people person]
+
+;globals [ dt ]
 
 people-own [
   sex
@@ -13,8 +17,13 @@ people-own [
 
 to setup
   clear-all
+  initialize-people
+  ;set dt time:create "2005/03/31"
   reset-ticks
-  file-close-all
+end
+
+to initialize-people
+    file-close-all
   ;file-open "test_dataset.csv"
   file-open "sdemt_2005t1_30087.csv"
 
@@ -28,7 +37,7 @@ to setup
     let data csv:from-row file-read-line
     ;print data
     create-people 1 [
-      setxy random-xcor random-ycor
+      ;setxy random-xcor random-ycor
       set shape "person"
       set sex item 21 data
       set eda item 22 data
@@ -36,13 +45,34 @@ to setup
       set Clase2 item 47 data
       set ingocup item 88 data
       ;set color read-from-string item 1 data
+      move-to one-of patches with [not any? people-here ]
     ]
   ]
   file-close-all
 end
 
 to go
+  ; stop condition
+  if ( ticks >= 100 ) [stop]
 
+  ; First process
+  age
+
+  tick
+end
+
+
+to age
+  if (ticks > 0 and ( ticks mod 4 = 0 ) )[
+    ask people [
+      set eda ifelse-value ( (eda / 102) ^ 2 < random-float 10)[eda + 1][0]
+    ]
+  ]
+end
+
+
+to plot-age
+  histogram [eda] of people
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -90,9 +120,9 @@ NIL
 1
 
 BUTTON
-99
+98
 11
-162
+161
 44
 NIL
 go
@@ -105,6 +135,35 @@ NIL
 NIL
 NIL
 1
+
+PLOT
+654
+10
+1101
+160
+Age distribution
+NIL
+NIL
+0.0
+100.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 1 -16777216 true "" "plot-age"
+
+MONITOR
+1104
+10
+1189
+55
+Average age
+mean [eda] of people
+0
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
