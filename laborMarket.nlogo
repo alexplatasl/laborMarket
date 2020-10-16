@@ -2,6 +2,9 @@ extensions [ csv ]
 
 breed [people person]
 
+people-own [unemployed?]
+
+
 to setup
   clear-all
   reset-ticks
@@ -12,6 +15,7 @@ to setup
   ;  read the header row here to move the cursor
   ;  down to the next line.
   let headings csv:from-row file-read-line
+  ;print item 0 headings
 
   while [ not file-at-end? ] [
     let data csv:from-row file-read-line
@@ -23,6 +27,7 @@ to setup
       set xcor item 4 data
       set ycor item 5 data
       set shape "person"
+      set unemployed? item 6 data
     ]
   ]
   file-close-all
