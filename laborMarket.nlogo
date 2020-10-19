@@ -220,41 +220,122 @@ PENS
 "max" 1.0 0 -2674135 true "" "plot max [eda] of people"
 
 @#$#@#$#@
-## WHAT IS IT?
+# Overview
+## 1 Propósito
+* ¿Cuál es el propósito del modelo?
+* ¿Con qué objetivo se ha desarrollado?
+* ¿Para qué se va a utilizar?
 
-(a general understanding of what the model is trying to show or explain)
+## 2 Entidades, Variables de estado y escalas
+* ¿Qué tipo de entidades conforman el modelo (agentes/individuos, unidades espaciales, medioambiente, colectividades)?
+* ¿Qué variables de estado o atributos internos caracterizan a tales entidades?
+* ¿En qué unidades se expresaran tales variables o atributos?
+* ¿Cual es la extensión espacial y temporal del modelo?
+* ¿Con qué nivel de precisión espacial y temporal se realizará la simulación?
 
-## HOW IT WORKS
+## 3 Resumen del proceso y su planificación
+* ¿Qué entidad hace qué?
+* ¿En qué orden se ejecutan los diferentes procesos?
+* ¿En qué orden ejecutan distintas entidades un mismo proceso?
+* ¿Cómo se modeliza el tiempo, mediante saltos discretos o como un continuo temporal en el que suceden tanto procesos continuos como sucesos discretos?
 
-(what rules the agents use to create the overall behavior of the model)
+# 4 Design concepts
 
-## HOW TO USE IT
+## Principios fundamentales
+* ¿Qué conceptos, teorías, hipótesis teóricas subyacen en el diseño del modelo?
+* ¿Qué estrategias de modelado subyacen en el mismo diseño?
+* ¿Qué relación guardan estas asunciones con el propósito del estudio?
+* ¿Cómo se tienen en cuenta en la modelización?
+* ¿Se utilizan en el nivel de los submodelos (como hipótesis microfundamentales) o en el nivel del sistema (como teorías macrodinámicas)?
+* ¿Proporcionará el modelo indicios respecto a estos principios fundamentales, como por ejemplo su alcance, su utilidad en escenarios reales, su validación o indicaciones para su modificación?
+* ¿Utiliza el modelo teorías consolidadas o novedosas?
 
-(how to use the model, including a description of each of the items in the Interface tab)
+## Emergencia
+* ¿Qué resultados son modelados como resultados emergente de rasgos adaptativos o de comportamiento de los individuos?
+* ¿Que resultados del modelo se espera que varíen de forma compleja y tal vez imprevisible ante un cambio de las características particulares de individuos o entorno?
+* ¿Qué resultados del modelo que están ya impuestos por las reglas y por tanto dependen menos de los comportamientos de los individuos?
 
-## THINGS TO NOTICE
+## Adaptación
+* ¿Qué rasgos adaptativos tienen los individuos?
+* ¿Qué reglas tienen para tomar decisiones o modificar su comportamiento en respuesta a cambios en sí mismos o en el entrono?
+* ¿Estos rasgos intentan incrementar algún tipo de indicador de éxito individual relacionado con sus objetivos (p.e., “desplazate a la posición que disponga de una productividad mayor”, asumiendo que productividad es un indicador de éxito)?
+* ¿O simplemente los individuos reproducen ciertos comportamientos que se asumen implícitamente como conducentes al éxito o la adaptación (p.e., “desplazate hacia la derecha un 70% del tiempo”)?
 
-(suggested things for the user to notice while running the model)
+## Objetivos
+* ¿Qué objetivos persiguen los individuos mediante los procesos de adaptación que rigen sus comportamientos?
+* ¿Cómo se pueden medir tales objetivos, así como su grado de cumplimiento?
+* ¿Qué criterios usan los agentes individuales para evaluar alternativas cuando tienen que tomar decisiones?
 
-## THINGS TO TRY
+## Aprendizaje
+* ¿Cambian los rasgos adaptativos a lo largo del tiempo como consecuencia de la experiencia?
+* ¿Cómo se dan tales cambios?
+* ¿Se trata de cambios conscientes, incluso planificados, o son simplemente respuestas a un entorno en evolución?
+* ¿Se dan procesos de co-evolución por influencia mutua entre características individuales y del entorno?
 
-(suggested things for the user to try to do (move sliders, switches, etc.) with the model)
+## Predicción
+* ¿Cómo predice un agente las condiciones futuras que experimentará?
+* ¿Cómo influyen tales predicciones sobre los procesos de adaptación y de aprendizaje?
+* ¿Qué elementos, propios y del entorno, utiliza un agente individual para realizar sus predicciones?
+* ¿Qué modelos internos (razonamiento) utilizan los agentes para estimar sus condiciones futuras?
+* ¿Qué modelos utilizan para estimar las consecuencias futuras de sus comportamientos?
+* ¿Qué supuestos tácitos implican tales modelos de razonamiento y racionalidad?
 
-## EXTENDING THE MODEL
+## Percepción
+* ¿Qué variables de estado, internas o del entorno, se asume que perciben los agentes?
+* ¿Qué modelo de medida usan los agentes para tal percepción?
+* ¿Qué otros agentes o entidades son percibidas, y en concreto mediante qué atributos?
+* ¿Mantienen los agentes una memoria o mapa a largo plazo de sus percepciones?
+* ¿Cual es el alcance de las señales que un agente puede percibir, local o global?
+* ¿Si la percepción es a través de una red social, su estructura es impuesta o emergente de la simulación?
+* ¿Los mecanismos mediante los que los agentes obtienen información están modelizados explícitamente, o se asumen como dados?
 
-(suggested things to add or change in the Code tab to make the model more complicated, detailed, accurate, etc.)
+## Interacción
+* ¿Qué tipos de interacciones se asumen como relevantes entre los agentes?
+* ¿Se trata de interacciones directas, en las que los encuentros entre agentes influyen sobre los mismos?
+* ¿Hay interacciones indirectas, como en caso de competir por un recurso intermedio?
+* ¿Si las interacciones implican comunicación, cómo se han modelizado tales procesos comunicativos?
 
-## NETLOGO FEATURES
 
-(interesting or unusual features of NetLogo that the model uses, particularly in the Code tab; or where workarounds were needed for missing features)
+## Aleatoriedad
+* ¿Qué procesos se han modelado asumiendo que son, total o parcialmente, aleatorios?
+* ¿Se utiliza la aleatoriedad para generar variabilidad en procesos para los que no se considera importante modelizar sus causas?
+* ¿Se utiliza aleatoriedad para generar sucesos o comportamientos que ocurren con una frecuencia específica conocida?
 
-## RELATED MODELS
+## Colectivos
+* ¿Los individuos forman o pertenecen a agregaciones que influyen y son influidas por los mismos individuos?
+* ¿Cómo se representan tales colectividades?
+* ¿Tales colectivos son una propiedad emergente del comportamiento de los individuos?
+* ¿Son los colectivos simplemente definiciones del modelador, es decir, conjuntos de entidades con sus propios atributos y comportamientos?
 
-(models in the NetLogo Models Library and elsewhere which are of related interest)
 
-## CREDITS AND REFERENCES
+## Observación
+* ¿Qué datos se generan y recopilan a partir de la simulación a efectos de análisis?
+* ¿Cómo son recopilados tales datos, y en qué momento o momentos?
+* ¿Se utiliza la totalidad de los datos generados, o sólo una muestra a imitación de lo que sucede habitualmente en un estudio empírico?
 
-(a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
+
+
+
+# Details
+
+## 5 Inicialización
+* ¿Cual es el estado inicial del modelo, esto es, en el momento t=0 de la ejecución de la simulación?
+* ¿Cuantas entidades forman la sociedad virtual inicialmente, y qué valores, exactos o como distribución aleatoria, tienen las variables de estado de las entidades?
+* ¿Es siempre idéntica o puede variar entre diferentes ejecuciones de la simulación?
+* ¿La inicialización corresponde a un estado del mundo real, esto es, está empíricamente calibrada (data-driven), o los valores son arbitrarios?
+* ¿Si se trata de una situación inicial experimental, cómo corresponden los valores arbitrarios a hipótesis concretas a contrastar?
+
+## 6 Datos de entrada
+¿Utiliza el modelo datos de fuentes externas (ficheros de datos, u otros modelos) para representar procesos que varían en el tiempo durante la simulación?
+
+## 7 Submodelos
+* ¿Qué modelos representan, con detalle, los procesos listados en el apartado de procesos y planificación?
+* ¿Cuales son los parámetros, dimensiones y valores de referencia de cada modelo?
+* ¿Qué ecuaciones o algoritmos permiten representar cada modelo?
+* ¿Cómo se han diseñado o seleccionado tales modelos?
+* ¿De qué otros sistemas se han “extraido” o “inspirado” los modelos para su uso actual?
+* ¿Cómo se justifica la verificación y la validez de cada modelo utilizado?
+* ¿Qué referencias y literatura relevante se puede aportar para cada submodelo, respecto a su implementación independiente, contraste, calibración y análisis?
 @#$#@#$#@
 default
 true
