@@ -10,26 +10,28 @@ people-own [
   ; tabla 2.5 de la tesis de Jean
   ; "Valores de las propiedades obtenidas de la base de datos"
   ; Atributos generales
-	; NIJ = NO INCLUIDA POR JEAN
+  Clase2; CONDICION, INEGI: Clasificación población ocupada y desocupada; disponible y no disponible
   sex; Sexo, INEGI: Sexo
-  eda; (NIC), INEGI: Edad
+  CS_P13_1; Escolaridad, INEGI: Pregunta 13 ¿Hasta qué grado aprobó …en la escuela?
+  CS_P17; ¿estudia? INEGI: ¿… Asiste actualmente a la escuela?
   eda5c; Edad 5 categorias, INEGI: Clasificación de la población de 15 años y más: Grupo de edad 5 claves
-  anios_esc; (NIC), INEGI: Años de escolaridad
-  CS_P13_1; Escolaridad discreta, INEGI: Pregunta 13 ¿Hasta qué grado aprobó …en la escuela?
-  c_inac5c; ¿Estudia?, INEGI: Clasificación de la población no económicamente activa no disponible por condición de inactividad
-  e_con; (NIC), INEGI: Estado conyugal
-  Clase2; (NIC), INEGI: Clasificación población ocupada y desocupada; disponible y no disponible
 
   ; Atributos laborales
-  dur9c; Jornada, INEGI: Clasificación de la población ocupada por la duración de la jornada
-  ingocup; (NIC), INEGI: Ingreso mensual
-	ing7c; Ingreso, INEGI: Clasificación de la población ocupada por nivel de ingreso
-  pos_ocu; Posición en la ocupación, INEGI: Clasificación de la población ocupada por posición en la ocupación
   rama_est1; Rama, INEGI: Clasificación de la población ocupada según sector de actividad-Totales
+  pos_ocu; Posición en la ocupación, INEGI: Clasificación de la población ocupada por posición en la ocupación
+  emp_ppal; Formalidad/Informalidad, INEGI: Clasificación de empleos formales e informales de la primera actividad
+	ing7c; Ingreso, INEGI: Clasificación de la población ocupada por nivel de ingreso
   seg_soc; Seguridad social, INEGI: Clasificación de la población ocupada por condición de acceso a instituciones de salud
   sub_o; ¿Subocupación?, INEGI: Población subocupada
   t_tra; Número de empleos, INEGI: Total de trabajos
-  emp_ppal; Formalidad/Informalidad, INEGI: Clasificación de empleos formales e informales de la primera actividad
+  dur_est; Jornada, INEGI: Clasificación de la población ocupada por la duración de la jornada
+
+  ; Otros atributos (NIJ = NO INCLUIDA POR JEAN)
+  eda; (NIJ), INEGI: Edad (númerica)
+  anios_esc; (NIJ), INEGI: Años de escolaridad (numérica)
+  e_con; (NIJ), INEGI: Estado conyugal
+  c_inac5c; (NIJ), INEGI: Clasificación de la población no económicamente activa no disponible por condición de inactividad
+  ingocup; (NIJ), INEGI: Ingreso mensual
 ]
 
 
@@ -60,20 +62,22 @@ to initialize-people
 			; Atributos Generales
 			set sex item 21 data
 			set eda item 22 data
-			set eda5c item 80 data
-			set anios_esc item 86 data
 			set CS_P13_1 item 28 data
-			set c_inac5c item 77 data
+      set CS_P17 item 33 data
 			set e_con item 35 data
 			set Clase2 item 47 data
-			; Atributos laborales
-			set dur9c item 54 data
-			set ingocup item 88 data
-			set ing7c item 53 data
+      set c_inac5c item 77 data
+      set eda5c item 80 data
+			set anios_esc item 86 data
+
+      ; Atributos laborales
 			set pos_ocu item 49 data
-			set rama_est1 item 58 data
-			set seg_soc item 50 data
-			set sub_o item 70 data
+      set seg_soc item 50 data
+      set ing7c item 53 data
+      set rama_est1 item 58 data
+      set dur_est item 60 data
+      set sub_o item 70 data			
+			set ingocup item 88 data
 			set t_tra item 97 data
 			set emp_ppal item 98 data
 			
