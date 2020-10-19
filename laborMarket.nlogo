@@ -7,11 +7,29 @@ breed [people person]
 ;globals [ dt ]
 
 people-own [
-  sex
-  eda
-  e_con
-  Clase2
-  ingocup
+  ; tabla 2.5 de la tesis de Jean
+  ; "Valores de las propiedades obtenidas de la base de datos"
+  ; Atributos generales
+	; NIJ = NO INCLUIDA POR JEAN
+  sex; Sexo, INEGI: Sexo
+  eda; (NIC), INEGI: Edad
+  eda5c; Edad 5 categorias, INEGI: Clasificación de la población de 15 años y más: Grupo de edad 5 claves
+  anios_esc; (NIC), INEGI: Años de escolaridad
+  CS_P13_1; Escolaridad discreta, INEGI: Pregunta 13 ¿Hasta qué grado aprobó …en la escuela?
+  c_inac5c; ¿Estudia?, INEGI: Clasificación de la población no económicamente activa no disponible por condición de inactividad
+  e_con; (NIC), INEGI: Estado conyugal
+  Clase2; (NIC), INEGI: Clasificación población ocupada y desocupada; disponible y no disponible
+
+  ; Atributos laborales
+  dur9c; Jornada, INEGI: Clasificación de la población ocupada por la duración de la jornada
+  ingocup; (NIC), INEGI: Ingreso mensual
+	ing7c; Ingreso, INEGI: Clasificación de la población ocupada por nivel de ingreso
+  pos_ocu; Posición en la ocupación, INEGI: Clasificación de la población ocupada por posición en la ocupación
+  rama_est1; Rama, INEGI: Clasificación de la población ocupada según sector de actividad-Totales
+  seg_soc; Seguridad social, INEGI: Clasificación de la población ocupada por condición de acceso a instituciones de salud
+  sub_o; ¿Subocupación?, INEGI: Población subocupada
+  t_tra; Número de empleos, INEGI: Total de trabajos
+  emp_ppal; Formalidad/Informalidad, INEGI: Clasificación de empleos formales e informales de la primera actividad
 ]
 
 
@@ -39,11 +57,26 @@ to initialize-people
     create-people 1 [
       ;setxy random-xcor random-ycor
       set shape "person"
-      set sex item 21 data
-      set eda item 22 data
-      set e_con item 35 data
-      set Clase2 item 47 data
-      set ingocup item 88 data
+			; Atributos Generales
+			set sex item 21 data
+			set eda item 22 data
+			set eda5c item 80 data
+			set anios_esc item 86 data
+			set CS_P13_1 item 28 data
+			set c_inac5c item 77 data
+			set e_con item 35 data
+			set Clase2 item 47 data
+			; Atributos laborales
+			set dur9c item 54 data
+			set ingocup item 88 data
+			set ing7c item 53 data
+			set pos_ocu item 49 data
+			set rama_est1 item 58 data
+			set seg_soc item 50 data
+			set sub_o item 70 data
+			set t_tra item 97 data
+			set emp_ppal item 98 data
+			
       ;set color read-from-string item 1 data
       move-to one-of patches with [not any? people-here ]
     ]
@@ -54,7 +87,7 @@ end
 to go
   ;; stop condition
   ; 60 ticks are equivalent to 15 years
-  ; So, simulated period from 2005 to 2020
+  ; So, simulated period goes from 2005 to 2020
   if ( ticks >= 60 ) [stop]
 
   ; First process
@@ -528,7 +561,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.0.4
+NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
