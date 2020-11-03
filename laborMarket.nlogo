@@ -1,4 +1,5 @@
 extensions [ csv
+  ocupacionBN
   ;time
 ]
 
@@ -94,8 +95,10 @@ to go
   ; So, simulated period goes from 2005 to 2020
   if ( ticks >= 60 ) [stop]
 
-  ; First process
+  ; 1st process
   age
+  ; 2nd process
+  ocupation
 
   tick
 end
@@ -105,6 +108,15 @@ to age
   if (ticks > 0 and ( ticks mod 4 = 0 ) )[
     ask people [
       set eda ifelse-value ( (eda / 102) ^ 2 < random-float 7)[eda + 1][0]
+    ]
+  ]
+end
+
+to ocupation
+  ask people with [Clase2 != 1][
+    let prob-ocupation ocupacionBN:get-condicion-prob (word sex "," CS_P17 "," CS_P13_1)
+    if (prob-ocupation > 0.3)[
+      set Clase2 1
     ]
   ]
 end
@@ -646,7 +658,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.1.1
+NetLogo 6.0.4
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
