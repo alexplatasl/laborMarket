@@ -241,26 +241,38 @@ PENS
 @#$#@#$#@
 # Overview
 ## 1 Propósito
-* **¿Cuál es el propósito del modelo?** Simular el mercado laboral veracruzano a partir de datos de la Encuesta Nacional de Ocupación y Empleo (ENOE).
-* **¿Con qué objetivo se ha desarrollado?** El objetivo de este trabajo es generar datos artificiales, mediante un sistema multiagente, que nos permita predecir las características de las entidades a observar en periodos de tiempo determinados. 
-* **¿Para qué se va a utilizar?** Para comparar los resultados de la simulación con los datos reales y así validar la propuesta de simulación con minería de datos.
+* **¿Cuál es el propósito del modelo?** 
+Simular el mercado laboral veracruzano a partir de datos de la Encuesta Nacional de Ocupación y Empleo (ENOE).
+* **¿Con qué objetivo se ha desarrollado?** 
+El objetivo de este trabajo es generar datos artificiales, mediante un sistema multiagente, que nos permita predecir las características de las entidades a observar en periodos de tiempo determinados. 
+* **¿Para qué se va a utilizar?** 
+Para comparar los resultados de la simulación con los datos reales y así validar la propuesta de simulación con minería de datos.
 
 ## 2 Entidades, Variables de estado y escalas
-* **¿Qué tipo de entidades conforman el modelo (agentes/individuos, unidades espaciales, medioambiente, colectividades)?** Los agentes son instanciados a partir de datos de la ENOE, por lo que representan a la Población Economicaamente Activa (PEA) y Población No Económicamente Activa (PNEA). El grid espacial no tiene significado. Existen modelos gráficos probabilistas, denominadas Redes Bayesianas, que son encapsulados y en los cuales los agentes hacen consultas para guiar su comportamiento.
-* **¿Qué variables de estado o atributos internos caracterizan a tales entidades?** Los agentes tienen dos grupos de atributos, denominaddos "generales" y "laborales". Las redes bayesianas son encapsulados con estado fijo, es decir, tanto la estructura como los parámetros no se modifican a lo largo de la simulación.
-* **¿En qué unidades se expresaran tales variables o atributos?** Tanto los atributos generales como laborales, pueden ser variables contínuas y discretas. Como el salario, la edad o la escolaridad. Sin embargo, al hacer la consulta a la red, todas las variables son discretas.
-* **¿Cual es la extensión espacial y temporal del modelo?** No existe una representación explicita del espacio. En cuanto a la extensión temporal, los datos de entrada corresponden a la ENOE del primer trimestre de 2005 y cada tick de la simulación representa un trimestre, se simularan 60 ticks, que representaran 15 años.
-* **¿Con qué nivel de precisión espacial y temporal se realizará la simulación?** La precisión temporal es trimestral. En cuanto al espacio, no hay representación explicita.
+* **¿Qué tipo de entidades conforman el modelo (agentes/individuos, unidades espaciales, medioambiente, colectividades)?** 
+Los agentes son instanciados a partir de datos de la ENOE, por lo que representan a la Población Economicaamente Activa (PEA) y Población No Económicamente Activa (PNEA). El grid espacial no tiene significado. Existen modelos gráficos probabilistas, denominadas Redes Bayesianas, que son encapsulados y en los cuales los agentes hacen consultas para guiar su comportamiento.
+* **¿Qué variables de estado o atributos internos caracterizan a tales entidades?** 
+Los agentes tienen dos grupos de atributos, denominaddos "generales" y "laborales". Las redes bayesianas son encapsulados con estado fijo, es decir, tanto la estructura como los parámetros no se modifican a lo largo de la simulación.
+* **¿En qué unidades se expresaran tales variables o atributos?** 
+Tanto los atributos generales como laborales, pueden ser variables contínuas y discretas. Como el salario, la edad o la escolaridad. Sin embargo, al hacer la consulta a la red, todas las variables son discretas.
+* **¿Cual es la extensión espacial y temporal del modelo?** 
+No existe una representación explicita del espacio. En cuanto a la extensión temporal, los datos de entrada corresponden a la ENOE del primer trimestre de 2005 y cada tick de la simulación representa un trimestre, se simularan 60 ticks, que representaran 15 años.
+* **¿Con qué nivel de precisión espacial y temporal se realizará la simulación?** 
+La precisión temporal es trimestral. En cuanto al espacio, no hay representación explicita.
 
 ## 3 Resumen del proceso y su planificación
-* **¿Qué entidad hace qué?** Los agentes, que representan a la PEA y a la PNEA, cada 4 ticks incrementan su edad en 1 año, y eventualmente realizan consultas a los modelos de red bayesiana. Por su parte, las redes bayesianas, sirven de guía para instanciar los atributos laborales o generales de los agentes que los consultan.
+* **¿Qué entidad hace qué?** 
+Los agentes, que representan a la PEA y a la PNEA, cada 4 ticks incrementan su edad en 1 año, y eventualmente realizan consultas a los modelos de red bayesiana. Por su parte, las redes bayesianas, sirven de guía para instanciar los atributos laborales o generales de los agentes que los consultan.
 * **¿En qué orden se ejecutan los diferentes procesos?** 
  1. Si han pasasdo 4 trimestres, se actualiza la edad de los agentes.
  2. Todos los agentes desocupados encuentran empleo, adquieren las propiedades de su empleo aleatoriamente.
  3. Se desemplea a agentes ocupados de acuerdo con la tasa publicada por el INEGI en el periodo simulado.
-* **¿En qué orden ejecutan distintas entidades un mismo proceso?** Los agentes son formados aleatoriamente en una cola, los primeros en la cola ejecutan primero el proceso. * **¿Cómo se modeliza el tiempo, mediante saltos discretos o como un continuo temporal en el que suceden tanto procesos continuos como sucesos discretos?** Se modela de forma discreta en saltos que representan un trimestre.
+* **¿En qué orden ejecutan distintas entidades un mismo proceso?** 
+Los agentes son formados aleatoriamente en una cola, los primeros en la cola ejecutan primero el proceso. 
+* **¿Cómo se modeliza el tiempo, mediante saltos discretos o como un continuo temporal en el que suceden tanto procesos continuos como sucesos discretos?** 
+Se modela de forma discreta en saltos que representan un trimestre.
 
-# 4 Design concepts
+# 4 Conceptos de diseño
 
 ## Principios fundamentales
 * **¿Qué conceptos, teorías, hipótesis teóricas subyacen en el diseño del modelo?** 
@@ -269,105 +281,179 @@ PENS
  3. Se asume que todos los agentes con estado "desocupado" encuentran empleo en un periodo.
  4. Se asume que 1000 agentes son suficientes para representar adecuadamente el mercado laboral del estado de Veracruz. 
  5. Los agentes incrementan su edad cada 4 periodos, pero se asume que no mueren.
-* **¿Qué estrategias de modelado subyacen en el mismo diseño?** Se utiliza una ruleta, para aleatoriamente seleccionar las propiedades de los agentes, en donde atributos con mayor probabilidad (derivado de la consulta a la red bayesiana) tienen mayor posibilidad de ser elegidos para instanciar al agente. 
+* **¿Qué estrategias de modelado subyacen en el mismo diseño?** 
+Se utiliza una ruleta, para aleatoriamente seleccionar las propiedades de los agentes, en donde atributos con mayor probabilidad (derivado de la consulta a la red bayesiana) tienen mayor posibilidad de ser elegidos para instanciar al agente. 
 * **¿Qué relación guardan estas asunciones con el propósito del estudio?** 
 * **¿Cómo se tienen en cuenta en la modelización?**
-* **¿Se utilizan en el nivel de los submodelos (como hipótesis microfundamentales) o en el nivel del sistema (como teorías macrodinámicas)?** Se utilizan a nivel de sistema como teorías macrodinámicas, ya que no se aporta evidencia en este trabajo sobre el uso de la ruleta a nivel microfundamento.
-* **¿Proporcionará el modelo indicios respecto a estos principios fundamentales, como por ejemplo su alcance, su utilidad en escenarios reales, su validación o indicaciones para su modificación?** Proporciona indicios sobre como podría implementarse en escenarios reales, pero aún se deben relajar muchos supuestos.
-* **¿Utiliza el modelo teorías consolidadas o novedosas?** Se utilizan las redes bayesianas, pero no como "guía" principal en el comportamiento de los agentes.
+* **¿Se utilizan en el nivel de los submodelos (como hipótesis microfundamentales) o en el nivel del sistema (como teorías macrodinámicas)?** 
+Se utilizan a nivel de sistema como teorías macrodinámicas, ya que no se aporta evidencia en este trabajo sobre el uso de la ruleta a nivel microfundamento.
+* **¿Proporcionará el modelo indicios respecto a estos principios fundamentales, como por ejemplo su alcance, su utilidad en escenarios reales, su validación o indicaciones para su modificación?** 
+Proporciona indicios sobre como podría implementarse en escenarios reales, pero aún se deben relajar muchos supuestos.
+* **¿Utiliza el modelo teorías consolidadas o novedosas?** 
+Se utilizan las redes bayesianas, pero no como "guía" principal en el comportamiento de los agentes.
 
 ## Emergencia
-* **¿Qué resultados son modelados como resultados emergente de rasgos adaptativos o de comportamiento de los individuos?** Las tasas de subocupación e informalidad.
-* **¿Que resultados del modelo se espera que varíen de forma compleja y tal vez imprevisible ante un cambio de las características particulares de individuos o entorno?** Dado que la adquisición de atributos se hace por medio del artificio de la ruleta, pueden existir muchos cambios imprevisibles, incluso si la tabla de probabilidad condicional de la red bayesiana está cargada hacia un atributo.
+* **¿Qué resultados son modelados como resultados emergente de rasgos adaptativos o de comportamiento de los individuos?** 
+Las tasas de subocupación e informalidad.
+* **¿Que resultados del modelo se espera que varíen de forma compleja y tal vez imprevisible ante un cambio de las características particulares de individuos o entorno?** 
+Dado que la adquisición de atributos se hace por medio del artificio de la ruleta, pueden existir muchos cambios imprevisibles, incluso si la tabla de probabilidad condicional de la red bayesiana está cargada hacia un atributo.
 * **¿Qué resultados del modelo que están ya impuestos por las reglas y por tanto dependen menos de los comportamientos de los individuos?** 
   1. El incremento en la edad.
   2. El cambio de status "desocupado" a "ocupado".
   3. La tasa de desempleo en cada periodo.
 
 ## Adaptación
-* **¿Qué rasgos adaptativos tienen los individuos?** Los agentes pueden adaptan edad, condición de ocupación, jornada laboral, ingreso, rama de actividad, posición en la ocupación, condición de subocupación, su acceso a la seguridad social y su condición de informalidad.
+* **¿Qué rasgos adaptativos tienen los individuos?** 
+Los agentes pueden adaptan edad, condición de ocupación, jornada laboral, ingreso, rama de actividad, posición en la ocupación, condición de subocupación, su acceso a la seguridad social y su condición de informalidad.
 * **¿Qué reglas tienen para tomar decisiones o modificar su comportamiento en respuesta a cambios en sí mismos o en el entrono?** 
  1. Cuando ha transcurrido un año, los agentes actualizan su edad.
  2. Cuando se encuentran "desocupados" pasan a "ocupados", realizan una inferencia a la red bayesiana para obtener las probabilidades de sus propiedades laborales y las cuales eligen mediante ruleta.
  3. La cantidad de agentes a desemplear, se modifica de acuerdo con la tasa de desempleo publicada por el INEGI.
-* **¿Estos rasgos intentan incrementar algún tipo de indicador de éxito individual relacionado con sus objetivos (p.e., “desplazate a la posición que disponga de una productividad mayor”, asumiendo que productividad es un indicador de éxito)?** No, las deciciones se toman al azar.
-* **¿O simplemente los individuos reproducen ciertos comportamientos que se asumen implícitamente como conducentes al éxito o la adaptación (p.e., “desplazate hacia la derecha un 70% del tiempo”)?** Si, los agentes tienden a reproducir ciertos comportamientos que se abstraen de la realidad a través de un modelo de redes bayesianas.
+* **¿Estos rasgos intentan incrementar algún tipo de indicador de éxito individual relacionado con sus objetivos (p.e., “desplazate a la posición que disponga de una productividad mayor”, asumiendo que productividad es un indicador de éxito)?** 
+No, las deciciones se toman al azar.
+* **¿O simplemente los individuos reproducen ciertos comportamientos que se asumen implícitamente como conducentes al éxito o la adaptación (p.e., “desplazate hacia la derecha un 70% del tiempo”)?** 
+Si, los agentes tienden a reproducir ciertos comportamientos que se abstraen de la realidad a través de un modelo de redes bayesianas.
 
 ## Objetivos
-* **¿Qué objetivos persiguen los individuos mediante los procesos de adaptación que rigen sus comportamientos?** Los agentes no tienen objetivos en sus procesos de adaptación.
-* **¿Cómo se pueden medir tales objetivos, así como su grado de cumplimiento?** Los agentes no tienen objetivos.
-* **¿Qué criterios usan los agentes individuales para evaluar alternativas cuando tienen que tomar decisiones?** Utilizan un ruleta para tomar decisiones.
+* **¿Qué objetivos persiguen los individuos mediante los procesos de adaptación que rigen sus comportamientos?** 
+Los agentes no tienen objetivos en sus procesos de adaptación.
+* **¿Cómo se pueden medir tales objetivos, así como su grado de cumplimiento?** 
+Los agentes no tienen objetivos.
+* **¿Qué criterios usan los agentes individuales para evaluar alternativas cuando tienen que tomar decisiones?** 
+Utilizan un ruleta para tomar decisiones.
 
 ## Aprendizaje
 * **¿Cambian los rasgos adaptativos a lo largo del tiempo como consecuencia de la experiencia?** 
-* **¿Cómo se dan tales cambios?**
-* **¿Se trata de cambios conscientes, incluso planificados, o son simplemente respuestas a un entorno en evolución?**
-* **¿Se dan procesos de co-evolución por influencia mutua entre características individuales y del entorno?**
+No, los agentes siguen las mismas reglas a lo largo de la simulación.
+* **¿Cómo se dan tales cambios?** 
+No hay cambios en la adaptación sólo en los estados de algunas variables.
+* **¿Se trata de cambios conscientes, incluso planificados, o son simplemente respuestas a un entorno en evolución?** 
+No hay cambios en los comportamientos.
+* **¿Se dan procesos de co-evolución por influencia mutua entre características individuales y del entorno?** 
+Los agentes y las redes bayesianas no cambian, por lo tanto no co-evolucionan.
 
 ## Predicción
-* **¿Cómo predice un agente las condiciones futuras que experimentará?**
-* **¿Cómo influyen tales predicciones sobre los procesos de adaptación y de aprendizaje?**
-* **¿Qué elementos, propios y del entorno, utiliza un agente individual para realizar sus predicciones?**
-* **¿Qué modelos internos (razonamiento) utilizan los agentes para estimar sus condiciones futuras?**
-* **¿Qué modelos utilizan para estimar las consecuencias futuras de sus comportamientos?**
-* **¿Qué supuestos tácitos implican tales modelos de razonamiento y racionalidad?**
+* **¿Cómo predice un agente las condiciones futuras que experimentará?** 
+Los agentes no hacen predicciones, toman decisiones aleatorias ponderadas por las probabilidades de una red bayesiana.
+* **¿Cómo influyen tales predicciones sobre los procesos de adaptación y de aprendizaje?** 
+No hay predicción y por lo tanto tampoco influencia en la adaptación y el aprendizaje.
+* **¿Qué elementos, propios y del entorno, utiliza un agente individual para realizar sus predicciones?** 
+Los agentes envían atributos internos como evidencia a una red bayesiana para obtener un conjunto de probabilidades sobre la instanciación de atributos en el siguiente periodo, sin embargo, no predice, utiliza esas probabilidades en una ruleta.
+* **¿Qué modelos internos (razonamiento) utilizan los agentes para estimar sus condiciones futuras?** 
+Los agentes utilizan una red bayesiana para obtener probabilidades sobre diferentes eventos (atributos) que deberan instanciar en el siguiente periodo. Utilizan esas probabilidades en una ruleta para tomar la decisión.
+* **¿Qué modelos utilizan para estimar las consecuencias futuras de sus comportamientos?** 
+ 1. Utilizan dos modelos de red bayesiana: 
+  a. uno sobre su condición de ocupación, 
+  b. y otro sobre sus condiciones laborales. 
+ 2. La ruleta empleada por De Jong (1975, Analysis of the behavior of a class of genetic adaptive systems).
+* **¿Qué supuestos tácitos implican tales modelos de razonamiento y racionalidad?** 
+ 1. Se asume que las redes representan adecuadamente el mercado laboral del estado de Veracruz.
+ 2. Se asume que la toma de decisiones basada en la ruleta de De Jong es adecuada para simular el mercado laboral del estado de Veracruz.
 
 ## Percepción
-* **¿Qué variables de estado, internas o del entorno, se asume que perciben los agentes?**
-* **¿Qué modelo de medida usan los agentes para tal percepción?**
+* **¿Qué variables de estado, internas o del entorno, se asume que perciben los agentes?** 
+Los agentes sólo pueden percibir sus propios atributos.
+* **¿Qué modelo de medida usan los agentes para tal percepción?** 
+
 * **¿Qué otros agentes o entidades son percibidas, y en concreto mediante qué atributos?**
+Pueden percibir las tablas de probabilidad condicional resultantes de la consulta a la red bayesiana, relacionados con los atributos de condición laboral o de empleo.
 * **¿Mantienen los agentes una memoria o mapa a largo plazo de sus percepciones?**
+No, los agentes no tienen memoría de sus percepciones.
 * **¿Cual es el alcance de las señales que un agente puede percibir, local o global?**
+Su alcance es local, ya que no pueden percibir los atributos de otros agentes.
 * **¿Si la percepción es a través de una red social, su estructura es impuesta o emergente de la simulación?**
+No existe una estructura en la simulación.
 * **¿Los mecanismos mediante los que los agentes obtienen información están modelizados explícitamente, o se asumen como dados?**
+Se trata de un mecanismo modelado explicitamente.
 
 ## Interacción
 * **¿Qué tipos de interacciones se asumen como relevantes entre los agentes?**
+No existe interacción entre los agentes. Sólo entre cada agente con la red bayesiana.
 * **¿Se trata de interacciones directas, en las que los encuentros entre agentes influyen sobre los mismos?**
+Entre los agentes no hay interacción. Del encuentro entre entre el agente y la red bayesiana surge una influencia parcial sobre la toma de decisión del agente.
 * **¿Hay interacciones indirectas, como en caso de competir por un recurso intermedio?**
+No existen interacciones indirectas.
 * **¿Si las interacciones implican comunicación, cómo se han modelizado tales procesos comunicativos?**
-
+En la interacción agente-red bayesiana, los agentes envían como evidencia sus atributos a la red bayesiana, la cual regresa al agente la(s) probabilidad(es) de ocurrencia de el(los) evento(s) consultados.
 
 ## Aleatoriedad
 * **¿Qué procesos se han modelado asumiendo que son, total o parcialmente, aleatorios?**
+La Ruleta de De Jong, para decidir entre probabilidades de ocurrencia de atributos es un proceso que es totalmente aleatorio.
 * **¿Se utiliza la aleatoriedad para generar variabilidad en procesos para los que no se considera importante modelizar sus causas?**
+Se utiliza aleatoriedad en los resultados de cada consulta hecha a la red bayesiana.
 * **¿Se utiliza aleatoriedad para generar sucesos o comportamientos que ocurren con una frecuencia específica conocida?**
+Se utiliza aleatoriedad, a través de la ruleta, en cada periodo.
 
 ## Colectivos
 * **¿Los individuos forman o pertenecen a agregaciones que influyen y son influidas por los mismos individuos?**
+No existe formación de colectivos o agrupaciones entre los agentes.
 * **¿Cómo se representan tales colectividades?**
+No aplica.
 * **¿Tales colectivos son una propiedad emergente del comportamiento de los individuos?**
+No aplica.
 * **¿Son los colectivos simplemente definiciones del modelador, es decir, conjuntos de entidades con sus propios atributos y comportamientos?**
-
+No aplica.
 
 ## Observación
 * **¿Qué datos se generan y recopilan a partir de la simulación a efectos de análisis?**
+Principalmente las tasas de subocupación y de informalidad laboral.
 * **¿Cómo son recopilados tales datos, y en qué momento o momentos?**
+En cada periodo se almacenan los atributos de los agentes.
 * **¿Se utiliza la totalidad de los datos generados, o sólo una muestra a imitación de lo que sucede habitualmente en un estudio empírico?**
+Se utiliza la totalidad de los datos generados.
 
 
 
-
-# Details
+# Detalles
 
 ## 5 Inicialización
-* **¿Cual es el estado inicial del modelo, esto es, en el momento t=0 de la ejecución de la simulación?**
-* **¿Cuantas entidades forman la sociedad virtual inicialmente, y qué valores, exactos o como distribución aleatoria, tienen las variables de estado de las entidades?**
+* **¿Cuál es el estado inicial del modelo, esto es, en el momento t=0 de la ejecución de la simulación?**
+Al momento inicial, los agentes adquieren sus atributos directamente de la Encuesta Nacional de Ocupación y Empleo.
+* **¿Cuántas entidades forman la sociedad virtual inicialmente, y qué valores, exactos o como distribución aleatoria, tienen las variables de estado de las entidades?**
+Son 1,000 agentes instanciados directamente de una muestra para el estado de Veracruz de la Encuesta Nacional de Ocupación y Empleo.
 * **¿Es siempre idéntica o puede variar entre diferentes ejecuciones de la simulación?**
+Siempre es idéntica.
 * **¿La inicialización corresponde a un estado del mundo real, esto es, está empíricamente calibrada (data-driven), o los valores son arbitrarios?**
+Corresponde a un estado del mundo real.
 * **¿Si se trata de una situación inicial experimental, cómo corresponden los valores arbitrarios a hipótesis concretas a contrastar?**
+No aplica.
 
 ## 6 Datos de entrada
 **¿Utiliza el modelo datos de fuentes externas (ficheros de datos, u otros modelos) para representar procesos que varían en el tiempo durante la simulación?**
+Si, se utiliza un muestra de tamaño 1000, correspondientes a datos del estado de Veracruz tomados de la Encuesta Nacional de Ocupación y Empleo del primer trimestre de 2010, especificamente del cuestionario sociodemográfico. También se utiliza información real sobre las tasas de desempleo de los siguientes periodos.
 
 ## 7 Submodelos
 * **¿Qué modelos representan, con detalle, los procesos listados en el apartado de procesos y planificación?**
+ 1. La red bayesiana de condición de ocupación, consta de 4 variables relacionadas de la siguiente manera:
+![BN_ocup](file:BN_cond_ocup.png)
+ 2. La red bayesiana de condiciones laborales, consta de 12 variables relacionadas de la siguiente manera:
+![BN_labs](file:BN_cond_labs.png)
+ 3. Al inicio, los atributos de los agentes son instanciados con una muestra de la ENOE, "representativa" del estado de Veracruz.
+ 4. Si han pasasdo 4 trimestres, se actualiza la edad de los agentes.
+ 5. Si un agente supera los 15 años, deja de ser considerado "menor".
+ 6. Todo agente con condición de ocupación "desocupada", cambiará su estatus a "ocupada".
+ 7. Todo agente que ha cambiado su condición a "ocupada", hará una consulta a la red bayesiana de condiciones laborales, enviando sus atributos generales (sexo, escolaridad, edad y ¿estudia?), para obtener Tablas de Probabilidad Condicional (TPC) del resto de las variables (propiedades laborales).
+ 8. Cuando un agente deja de ser menor, debe cambiar su condición, envia sus atributos (sexo, escolaridad, ¿estudia?) a la red bayesiana de condición de ocupación, para obtener la TPC de la variable condición.
+ 9. Si condición cambia de "menor" a "ocupado", en ese mismo periodo realiza una consulta a la red bayesiana de condiciones laborales.
+ 10. Con la información de las TPC, se realiza una selección aleatoria mediante ruleta de cada uno de los estatos de las variables consultadas (de condición o laborales).
+ 11. Se desemplea a agentes ocupados aleatoriamente de acuerdo con la tasa publicada por el INEGI en el periodo simulado.
 * **¿Cuales son los parámetros, dimensiones y valores de referencia de cada modelo?**
+ 1. Las redes bayesianas fueron seleccionadas por "observación", con el algoritmo de búsqueda Hill Climber, iniciando con una red vacia, empleando la manta de Markov, con un máximo de 10000 padres, Minimum Description Length (MDL) como métrica de evaluación y se permite revertir arcos.
+ 2. El poder predictivo de la red bayesiana de condición de ocupación es de 65.73% (bajo), mientras que para la red bayesiana de condiciones laborales es de 94.11% (alto).
+ 3. Se inicia con 1000 agentes, se asume que son una muestra "representativa" del estado de Veracruz.
+ 3. Los valores de referencia  para los atributos de los 1000 agentes son obtenidos directamente del conjunto muestral de datos de la ENOE. Nota: No se especifica el criterio para determinar la representatividad de la muestra.
 * **¿Qué ecuaciones o algoritmos permiten representar cada modelo?**
+Las acciones de los agentes de representan a través de reglas de comportamiento.
 * **¿Cómo se han diseñado o seleccionado tales modelos?**
+Se asume que el mecanismo aleatorio de la ruleta para la toma decisiones de los agentes representa adecuadamente la realidad.
 * **¿De qué otros sistemas se han “extraido” o “inspirado” los modelos para su uso actual?**
+Se emplea el enfoque guiado por datos.
 * **¿Cómo se justifica la verificación y la validez de cada modelo utilizado?**
+ 1. No existe evidencia contundente sobre la validación de la correcta especificación de los modelos de red bayesiana.
+ 2. Se comparan los datos artificiales sobre la tasa de subocupación y tasa de ocupación en el sector informal, con los datos reales para establecer la validez de la simulación.
+ 3. También se compara la tasa de desocupación generada por la simulación con la real, pero existe una alta posibilidad de que esto sea así por el submodelo 11.
 * **¿Qué referencias y literatura relevante se puede aportar para cada submodelo, respecto a su implementación independiente, contraste, calibración y análisis?**
+No existe literatura sobre la correcta especificación de los modelos de red bayesiana.
 @#$#@#$#@
 default
 true
@@ -674,7 +760,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.0.4
+NetLogo 6.1.1
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
