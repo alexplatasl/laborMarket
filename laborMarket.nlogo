@@ -110,18 +110,15 @@ to go
 end
 
 to nets
-    ; Following lines works!
-  ;print r:get "getwd()"
-  ;r:eval "red.file <- list.files(pattern = 'ocu_exp1', full.name = TRUE)"
-  ;r:eval "netgral <- read.net(red.file)"
-  ;print r:get "netgral"
-
   ; Following lines also works
   r:eval "library(bnlearn)"
   let evalstring (word "netgral <- read.net('" red-ocupacion "')")
   r:eval evalstring
+  print "Red Bayesiana de condición de ocupación"
   print r:get "netgral"
-  r:eval "graphviz.plot(netgral)"
+  print "cpquery evento = 'NODISPONIBLE', evidencia = 1,1,3"
+  print r:get "cpquery(netgral, event = (CONDICION == 'NODISPONIBLE'), evidence = ((SEX == '1') & (CS_P17 == '1') & (CS_P13_1 == '3') ) )"
+  ;r:eval "graphviz.plot(netgral)"
 end
 
 
@@ -285,10 +282,20 @@ INPUTBOX
 258
 165
 red-ocupacion
-C:/Users/User/Dropbox/Research/Unemployment/laborMarket/cond_exp1.net
+D:/alepa/Dropbox/Research/Unemployment/laborMarket/cond_exp1.net
 1
 0
 String
+
+TEXTBOX
+12
+168
+162
+186
+Evita usar diagonal invertida
+11
+4.0
+1
 
 @#$#@#$#@
 # Overview
@@ -814,7 +821,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.1.1
+NetLogo 6.0.4
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
