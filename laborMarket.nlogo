@@ -42,8 +42,11 @@ people-own [
 to setup
   clear-all
   initialize-people
+  nets
   ;set dt time:create "2005/03/31"
   reset-ticks
+  ; try to initialize the JavaGD plot device
+  r:setPlotDevice
 end
 
 to initialize-people
@@ -101,9 +104,24 @@ to go
   ; 1st process
   age
   ; 2nd process
-  ;ocupation
+  ; ocupation
 
   tick
+end
+
+to nets
+    ; Following lines works!
+  ;print r:get "getwd()"
+  ;r:eval "red.file <- list.files(pattern = 'ocu_exp1', full.name = TRUE)"
+  ;r:eval "netgral <- read.net(red.file)"
+  ;print r:get "netgral"
+
+  ; Following lines also works
+  r:eval "library(bnlearn)"
+  let evalstring (word "netgral <- read.net('" red-ocupacion "')")
+  r:eval evalstring
+  print r:get "netgral"
+  r:eval "graphviz.plot(netgral)"
 end
 
 
@@ -125,15 +143,21 @@ end
 ;end
 
 
+to ocupation
+  ask people with [Clase2 != 1][
+
+  ]
+end
+
 to plot-age
   histogram [eda] of people
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-210
-10
-647
-448
+272
+11
+709
+449
 -1
 -1
 13.0
@@ -191,10 +215,10 @@ NIL
 1
 
 PLOT
-654
-10
-1101
-160
+716
+11
+1163
+161
 Age distribution
 Age
 Freq
@@ -209,10 +233,10 @@ PENS
 "default" 1.0 1 -16777216 true "" "plot-age"
 
 MONITOR
-1009
-19
-1094
-64
+1071
+20
+1156
+65
 Average age
 mean [eda] of people
 0
@@ -220,10 +244,10 @@ mean [eda] of people
 11
 
 PLOT
-1104
-10
-1460
-160
+1166
+11
+1522
+161
 Trend Age
 Quarter
 Age
@@ -237,6 +261,34 @@ true
 PENS
 "avg" 1.0 0 -16777216 true "" "plot mean [eda] of people"
 "max" 1.0 0 -2674135 true "" "plot max [eda] of people"
+
+BUTTON
+7
+50
+258
+83
+elige la ruta a la red de ocupación...
+set red-ocupacion user-file
+NIL
+1
+T
+OBSERVER
+NIL
+NIL
+NIL
+NIL
+1
+
+INPUTBOX
+8
+86
+258
+165
+red-ocupacion
+C:/Users/User/Dropbox/Research/Unemployment/laborMarket/cond_exp1.net
+1
+0
+String
 
 @#$#@#$#@
 # Overview
@@ -264,9 +316,9 @@ La precisión temporal es trimestral. En cuanto al espacio, no hay representaci�
 * **¿Qué entidad hace qué?** 
 Los agentes, que representan a la PEA y a la PNEA, cada 4 ticks incrementan su edad en 1 año, y eventualmente realizan consultas a los modelos de red bayesiana. Por su parte, las redes bayesianas, sirven de guía para instanciar los atributos laborales o generales de los agentes que los consultan.
 * **¿En qué orden se ejecutan los diferentes procesos?** 
- 1. Si han pasasdo 4 trimestres, se actualiza la edad de los agentes.
- 2. Todos los agentes desocupados encuentran empleo, adquieren las propiedades de su empleo aleatoriamente.
- 3. Se desemplea a agentes ocupados de acuerdo con la tasa publicada por el INEGI en el periodo simulado.
+  1. Si han pasado 4 trimestres, se actualiza la edad de los agentes.  
+  2. Todos los agentes desocupados encuentran empleo, adquieren las propiedades de su empleo aleatoriamente.  
+  3. Se desemplea a agentes ocupados de acuerdo con la tasa publicada por el INEGI en el periodo simulado.
 * **¿En qué orden ejecutan distintas entidades un mismo proceso?** 
 Los agentes son formados aleatoriamente en una cola, los primeros en la cola ejecutan primero el proceso. 
 * **¿Cómo se modeliza el tiempo, mediante saltos discretos o como un continuo temporal en el que suceden tanto procesos continuos como sucesos discretos?** 
@@ -345,7 +397,9 @@ Los agentes utilizan una red bayesiana para obtener probabilidades sobre diferen
  1. Utilizan dos modelos de red bayesiana: 
   a. uno sobre su condición de ocupación, 
   b. y otro sobre sus condiciones laborales. 
- 2. La ruleta empleada por De Jong (1975, Analysis of the behavior of a class of genetic adaptive systems).
+ 2. La ruleta empleada por De Jong<sup>[1]</sup> 
+> [1] De Jong, K.A.: Analysis of the behavior of a class of genetic adaptive systems. Tech. Rep. 185, The University of Michigan (1975).
+
 * **¿Qué supuestos tácitos implican tales modelos de razonamiento y racionalidad?** 
  1. Se asume que las redes representan adecuadamente el mercado laboral del estado de Veracruz.
  2. Se asume que la toma de decisiones basada en la ruleta de De Jong es adecuada para simular el mercado laboral del estado de Veracruz.
@@ -354,7 +408,7 @@ Los agentes utilizan una red bayesiana para obtener probabilidades sobre diferen
 * **¿Qué variables de estado, internas o del entorno, se asume que perciben los agentes?** 
 Los agentes sólo pueden percibir sus propios atributos.
 * **¿Qué modelo de medida usan los agentes para tal percepción?** 
-
+Pendiente.
 * **¿Qué otros agentes o entidades son percibidas, y en concreto mediante qué atributos?**
 Pueden percibir las tablas de probabilidad condicional resultantes de la consulta a la red bayesiana, relacionados con los atributos de condición laboral o de empleo.
 * **¿Mantienen los agentes una memoria o mapa a largo plazo de sus percepciones?**
