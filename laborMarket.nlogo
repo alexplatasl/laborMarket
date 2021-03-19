@@ -282,7 +282,7 @@ INPUTBOX
 258
 165
 red-ocupacion
-D:/alepa/Dropbox/Research/Unemployment/laborMarket/cond_exp1.net
+/Users/aguerra/Documents/tesistas/alex/dia/codigo/laborMarket/cond_exp1.net
 1
 0
 String
@@ -291,7 +291,7 @@ TEXTBOX
 12
 168
 162
-186
+211
 Evita usar diagonal invertida
 11
 4.0
@@ -821,7 +821,7 @@ false
 Polygon -7500403 true true 270 75 225 30 30 225 75 270
 Polygon -7500403 true true 30 75 75 30 270 225 225 270
 @#$#@#$#@
-NetLogo 6.0.4
+NetLogo 6.2.0
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
